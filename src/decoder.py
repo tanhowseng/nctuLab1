@@ -15,7 +15,7 @@ def decode(data, key, id):
             temp = data[i][0 : len(data[i]) - 1]
         temp = bytearray.fromhex(temp).decode()
         result.append(temp)
-    
+
     # Output the decoded result
     drawPixel(result, key, id)
 
@@ -55,7 +55,7 @@ def drawPixel(data, key, id):
         for j in range (0, len(data[i])):
             if data[i][j] != 'X':
                 pixelBox(pixel, i, j, size, ImageColor.getrgb(colourPalette[data[i][j]]))
-    
+
     # Save file
     filename = './out/lab1_' + id + '.png'
     image.save(filename)
@@ -63,6 +63,7 @@ def drawPixel(data, key, id):
 '''
 Main function
 '''
+
 def main():
     # Check the input args
     if len(sys.argv) != 2:
@@ -86,7 +87,7 @@ def main():
             key = key + line[0]
             data.append(line[1 : -1])
             id = ''.join(reversed(key[0 : 7]))
-    
+
     # Check the length of input received secret
     if key != sys.argv[1]:
         key = 'EB3323'
@@ -100,7 +101,7 @@ def main():
     print('[INFO] Finish decoding')
 
     # Decode the secret
-    decode(data, key[0 : 7], id)
+    decode(data, key[0 : 6], id)
 
 if __name__ == '__main__':
     main()
